@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Service</title>
+    <link href="assets/img/WYicon.png" rel="icon">
+    <link rel="stylesheet" href="assets/css/style.css">
+<style>
+    .jotform-section {
+        display: none; /* Initially hide the section */
+        max-width: 700px; /* Set a maximum width */
+        margin: 0 auto; /* Center the section */
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .jotform-section.show {
+        display: block; /* Show the section when a package is selected */
+    }
+
+    .contact-section {
+        max-width: 650px; /* Set a maximum width */
+        margin: 0 auto; /* Center the section */
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .contact-section h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        text-align: center; /* Center the heading */
+    }
+
+    .jotform-section h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        text-align: center; /* Center the heading */
+    }
+
+    .jotform-section p {
+        font-size: 15px;
+        margin-bottom: 15px;
+        text-align: center; /* Center the heading */
+    }
+
+    /* Form field styling */
+    .jotform-form-row {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    .jotform-form-label {
+        width: 200px; /* Fixed label width */
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .jotform-form-input,
+    .jotform-form-input-file,
+    .jotform-form-textarea 
+    {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .jotform-form-input[type="color"] {
+        height: 40px;
+        padding: 0;
+    }
+
+    /* Adjust input size and make them smaller */
+    .jotform-form-input,
+    .jotform-form-input-file,
+    .jotform-form-textarea {
+        padding: 8px;
+    }
+
+    /* Submit button styling */
+    .jotform-submit-section {
+        text-align: center;
+    }
+
+    .jotform-submit {
+        background-color: #4F8E35; /* Grey color for the button */
+        color: #fff;
+        border: none;
+        padding: 10px 20px; /* Reverted to previous size */
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center; /* Center the button */
+        display: block;
+        margin: 0 auto;
+    }
+
+    .jotform-submit:hover {
+        background-color: #444; /* Darker grey on hover */
+    }
+
+    /* Add styles for the horizontal line */
+    .subscription-packages {
+        display: flex;
+        justify-content: space-around;
+        align-items: stretch;
+        flex-wrap: nowrap; /* Prevent wrapping to keep all packages on the same row */
+        overflow-x: auto; /* Enable horizontal scrolling if the content is too wide */
+        margin-top: 20px;
+        width: 100%; /* Set width to 100% */
+    }
+    
+    .subscription-package {
+        flex: 0 0 calc(33.33% - 15px);
+        margin-right: 20px; /* Add margin between packages */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .subscription-package img {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1rem;
+            text-align: center; /* Center the button */
+            display: block;
+            margin: 0 auto;
+        }
+        
+    .subscription-package:last-child {
+        margin-right: 0; /* Remove margin for the last package */
+    }
+    
+    .subscription-package:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .subscription-package h3 {
+        background-color: #4F8E35;
+        color: #fff;
+        padding: 15px;
+        margin: 0;
+        font-size: 15px;
+        text-align: center;
+    }
+        
+    .subscription-package h3.selected-package {
+        color: #4F8E35; /* Blue text color */
+        background-color: #808080; /* Grey background color */
+        /* Add any additional styles for the selected state if needed */
+    }
+    
+    .subscription-package p {
+        padding: 10px;
+        margin: 0;
+        font-size: 14px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .subscription-package ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .subscription-package ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .subscription-package p:last-child,
+    .subscription-package ul li:last-child {
+        border-bottom: none;
+    }
+    
+    .subscription-package .package-price {
+        background-color: #555;
+        color: #fff;
+        padding: 15px;
+        margin: 0;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    /* Form display styles */
+    #lawn-care-form,
+    #pool-care-form,
+    #pressure-washing-form {
+        display: none;
+    }
+
+    #quote-button,
+    #pool-quote-button,
+    #pressure-washing-quote-button {
+        width: 20%; /* Adjust the width as needed */
+        margin-left: 10px;
+    }
+
+    #lawn-budget,
+    #pool-budget,
+    #pw-budget {
+        width: 20%;
+    }
+
+    #lawn-property-size,
+    #pool-size,
+    #area-size{
+        width: 50%;
+        margin-left: 80px;
+    }
+
+    .idk-row{
+        display: flex;
+        justify-content: center; /* Center the content horizontally */
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .idk-row input[type="checkbox"] {
+        margin-right: -50px; /* Adjust the spacing between the checkbox and label as needed */
+        flex: 1;
+    }
+
+    #no-property-size-label{
+        display: block;
+        text-align: center; /* Center the text */
+        overflow: hidden;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        }
+
+    footer {
+        margin-top: auto;
+    }
+
+    #address-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .address-input {
+        flex: 1;
+        padding: 0 20px; /* Adjust spacing as needed */
+    }
+
+    .address-input:first-child {
+        padding-left: 0;
+    }
+
+    .address-input:last-child {
+        padding-right: 0;
+    }
+    
+    /* New styles for tier descriptions */
+    .tier-description {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More modern font */
+        font-size: 14px;
+        color: #333;
+        background-color: #ffffff; /* Lighter background for a cleaner look */
+        border: 1px solid #bbb; /* Softer border color */
+        padding: 6px; /* Reduced padding */
+        margin-bottom: 10px; /* Reduced margin between tiers */
+        border-radius: 8px; /* Slightly larger border radius for a softer look */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Enhanced shadow for depth */
+        transition: all 0.3s ease; /* Smooth transition for hover effects */
+    }
+
+    .tier-description:hover {
+        box-shadow: 0 6px 10px rgba(0,0,0,0.15); /* Deeper shadow on hover for an interactive effect */
+        transform: translateY(-2px); /* Slight lift effect on hover */
+    }
+
+    .tier-block {
+        font-size: 11px;
+    }
+    
+    .mobile-label {
+        display: none;
+    }
+    
+    .desktop-label {
+       display: block;
+    }
+
+    .mobile-message {
+        display: none;
+    }
+
+    .hamburger {
+        display: none; /* Hamburger menu is hidden by default */
+    }
+
+    nav {
+        display: flex; /* Use flexbox for layout */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
+
+    @media (max-width: 768px) {
+        .jotform-section, .contact-section {
+            padding: 10px;
+            margin: 10px;
+            max-width: 100%;
+        }
+
+        .jotform-form-label, .jotform-form-input, .jotform-form-textarea {
+            width: 100%; /* Make input fields take full width */
+        }
+
+        .jotform-submit {
+            padding: 15px 30px; /* Larger touch targets */
+            font-size: 18px; /* Larger font size for readability */
+        }
+
+        .subscription-package {
+            flex: 0 0 100%; /* Full width for each package */
+            margin-bottom: 20px; /* Space between packages */
+        }
+
+        .subscription-package img {
+            width: 100px; /* Smaller images for smaller screens */
+            height: 100px;
+        }
+
+        .jotform-section h2, .contact-section h2 {
+            font-size: 18px; /* Slightly larger headings for better visibility */
+        }
+
+        nav {
+            position: relative;
+        }
+
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            font-size: 30px;
+        }
+
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            background-color: #333;
+        }
+
+        .nav-links a {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: block;
+        }
+
+        label[for="street-name"] {
+            content: "Street";
+        }
+
+        label[for="zip-code"] {
+            content: "Zip";
+        }
+
+        .idk-row {
+            display: block;
+            width: 100%;
+        }
+
+        #lawn-budget,
+        #pool-budget,
+        #pw-budget {
+            width: 100%; /* Adjust as needed to fit the screen */
+        }
+
+        .desktop-label {
+            display: none;
+        }
+        .mobile-label {
+            display: block;
+        }
+        .mobile-message {
+            display: block;
+        }
+        
+         body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+    
+        footer {
+            margin-top: auto;
+        }
+    }
+</style>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <header>
+        <h1>Book a Service</h1>
+    </header>
+
+    <nav>
+        <div class="hamburger">&#9776;</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="contact-section">
+            <p style="text-align: center; font-size: 13px;">Please select a form below to set up an appointment and service tier that best suits your needs.</p>
+            <div class="tier-description">
+                <div class="tier-block">
+                    <h4 style="text-align: center;"><strong>Tier 1</strong></h4>
+                    <p style="text-align: center;">Ideal for those seeking essential, budget-friendly solutions without sacrificing efficiency. Receive reliable service that covers the basics at an economical price.</p>
+                </div>
+                <div class="tier-block">
+                    <h4 style="text-align: center;"><strong>Tier 2</strong></h4>
+                    <p style="text-align: center;">Perfect for those who desire enhanced services at a reasonable rate. Enjoy thorough and meticulous care that maintains quality while remaining cost-effective.</p>
+                </div>
+                <div class="tier-block">
+                    <h4 style="text-align: center;"><strong>Tier 3</strong></h4>
+                    <p style="text-align: center;">Designed for those who expect the highest level of service with meticulous attention to detail. Experience superior results and comprehensive care, ensuring a pristine outcome.</p>
+                </div>
+            </div>
+            <p class="mobile-message">Please scroll (left or right) through the forms to find the one that best suits your specific needs.</p>
+            <div class="subscription-packages">
+                <!-- Starter Package -->
+                <div class="subscription-package" id="package1" onclick="selectPackage('package1')">
+                    <h3 class="package-name">Lawn Care</h3>
+                    <p><img src="assets/img/grass.png" alt="Lawn Care"></p>
+                    <p>- Mowing, Edge up, & Trim <br>- Leaf & Snow Removal</p>
+                </div>
+    
+                <!-- Pro Package -->
+                <div class="subscription-package" id="package2" onclick="selectPackage('package2')">
+                    <h3 class="package-name">Pool Care</h3>
+                    <p><img src="assets/img/swimming-pool.png" alt="Pool Care"></p>
+                    <p>- Pool Maintenance <br>- Diagnostic <br>- Openings & Closings</p>
+                </div>
+    
+                <!-- Ultimate Package -->
+                <div class="subscription-package" id="package3" onclick="selectPackage('package3')">
+                    <h3 class="package-name">Pressure Washing</h3>
+                    <p><img src="assets/img/pressure-washer.png" alt="Pressure Washing"></p>
+                    <p>- Pressure Washing <br>- Gutter Cleaning <br>- Dumpster Cleaning</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="jotform-section">
+            <!-- Lawn Care Form -->
+            <form id="lawn-care-form" onsubmit="return validateAddress()" style="display: none;" method="POST" action="assets/php/quickbook.php" enctype="multipart/form-data">
+                <h2>Lawn Care Service Form</h2>
+                <div class="jotform-form-row">
+                    <label for="customer-name" class="jotform-form-label">Full Name:</label>
+                    <input type="text" id="customer-name" name="customer-name" class="jotform-form-input">
+                </div>
+                <div class="jotform-form-row">
+                    <label for="customer-email" class="jotform-form-label">Email Address:</label>
+                    <input type="email" id="customer-email" name="customer-email" class="jotform-form-input">
+                </div>
+                <div class="jotform-form-row">
+                    <label for="customer-phone" class="jotform-form-label">Phone Number:</label>
+                    <input type="tel" id="customer-phone" name="customer-phone" class="jotform-form-input">
+                </div>
+                <div id="address-row" class="jotform-form-row">
+                    <div class="address-input">
+                        <label for="street-name" class="jotform-form-label desktop-label">Street Name:</label>
+                        <label for="street-name" class="jotform-form-label mobile-label">Street:</label>
+                        <input type="text" id="street-name" name="street-name" class="jotform-form-input" required>
+                    </div>
+                    <div class="address-input">
+                        <label for="city-name" class="jotform-form-label">City:</label>
+                        <input type="text" id="city-name" name="city-name" class="jotform-form-input" required>
+                    </div>
+                    <div class="address-input">
+                        <label for="state-name" class="jotform-form-label">State:</label>
+                        <select id="state-name" name="state-name" class="jotform-form-input" required>
+                            <option value="">Select State</option>
+                            <option value="GA">Georgia</option>
+                            <!-- Add other states as needed -->
+                        </select>
+                    </div>
+                    <div class="address-input">
+                        <label for="zip-code" class="jotform-form-label">Zip Code:</label>
+                        <input type="text" id="zip-code" name="zip-code" class="jotform-form-input" style="width: 70%;" required>
+                    </div>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="property-type" class="jotform-form-label">Type of property:</label>
+                    <select id="property-type" name="property-type" class="jotform-form-input">
+                        <option value="residential">Residential</option>
+                        <option value="commercial">Commercial</option>
+                    </select>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="service-type" class="jotform-form-label">Type of service:</label>
+                    <select id="service-type" name="service-type" class="jotform-form-input">
+                        <option value="cut">Simple Cut</option>
+                        <option value="leaf">Leaf Removal</option>
+                        <option value="snow">Snow Removal</option>
+                    </select>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="lawn-property-size" class="jotform-form-label">Size of the property <br> (in acres):</label>
+                    <input type="number" step="0.01" value="0.0" id="lawn-property-size" name="lawn-property-size" class="jotform-form-input">
+                    &emsp;&emsp;
+
+                    <div class="idk-row">
+                        <input type="checkbox" value="idk" id="no-property-size-lawn" name="no-property-size" class="jotform-form-input">
+                        &emsp;
+                        <label for="no-property-size-lawn" id="no-property-size-label" class="jotform-form-label">Not sure</label>
+                    </div>
+                </div>
+                <div id="cut-options">
+                    <div class="jotform-form-row">
+                        <label for="lawn-current-state" class="jotform-form-label">Current state of the lawn:</label>
+                        <select id="lawn-current-state" name="lawn-current-state" class="jotform-form-input">
+                            <option value="regular">Regular maintenance</option>
+                            <option value="overgrown">Overgrown/Extra Care needed</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="removal-options" style="display: none;">
+                    <div class="jotform-form-row">
+                        <label for="surface-type" class="jotform-form-label">Type of Surface:</label>
+                        <select id="surface-type" name="surface-type" class="jotform-form-input">
+                            <option value="driveway">Driveway</option>
+                            <option value="sidewalk">Sidewalk</option>
+                            <option value="walkway">Walkway</option>
+                            <option value="deck">Deck</option>
+                            <option value="all">All Pavement</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="lawn-terrain" class="jotform-form-label">Terrain of the property:</label>
+                    <select id="lawn-terrain" name="lawn-terrain" class="jotform-form-input">
+                        <option value="flat">Flat</option>
+                        <option value="sloped">Sloped</option>
+                        <option value="multi">Multi-terrain</option>
+                    </select>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="accessibility" class="jotform-form-label">Accessibility (Pets, Obstacles, Parking Instructions):</label>
+                    <textarea id="accessibility" name="accessibility" class="jotform-form-input"></textarea>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="preferred-contact" class="jotform-form-label">Preferred Contact Method:</label>
+                    <select id="preferred-contact" name="preferred-contact" class="jotform-form-input">
+                        <option value="email">Email</option>
+                        <option value="phone">Phone</option>
+                        <option value="text">Text</option>
+                    </select>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="additional-info" class="jotform-form-label">Additional information or questions:</label>
+                    <textarea id="additional-info" name="additional-info" class="jotform-form-textarea"></textarea>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="lawn-photos" class="jotform-form-label">Upload Photos:</label>
+                    <input type="file" id="lawn-photos" name="lawn-photos[]" class="jotform-form-input" multiple>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="lawn-budget" class="jotform-form-label">Get Instant Quote <br> (if acreage entered):</label>
+                    <select id="lawn-budget" name="lawn-budget" class="jotform-form-input">
+                        <option value="ok">Tier 1</option>
+                        <option value="good">Tier 2</option>
+                        <option value="best">Tier 3</option>
+                    </select>
+
+                    &nbsp;
+
+                    <button type="button" id="quote-button" class="jotform-form-input">Get Quote</button>
+                </div>
+                <input type="hidden" id="lawn-projectedTotalCost" name="projectedTotalCost">
+                <div id="quote-result" style="text-align: center;"></div> <!-- To display the quote result -->
+                <br>
+                <div class="g-recaptcha" data-sitekey="6LcXEJ4pAAAAANKctEJyDsXMcnBESRGPwjPabMHb"></div>
+                <br>
+                <div class="jotform-submit-section">
+                    <button type="submit" class="jotform-submit" data-callback="onSubmitLawn">Submit</button>
+                </div>
+            </form>
+
+            <!-- Pool Care Form -->
+            <form id="pool-care-form" onsubmit="return validateAddress()" style="display: none;" method="POST" action="assets/php/quickbook.php" enctype="multipart/form-data">
+                <h2>Pool Care Service Form</h2>
+                <div class="jotform-form-row">
+                    <label for="customer-name" class="jotform-form-label">Name:</label>
+                    <input type="text" id="customer-name" name="customer-name" class="jotform-form-input">
+                </div>
+                <div class="jotform-form-row">
+                    <label for="customer-email" class="jotform-form-label">Email:</label>
+                    <input type="email" id="customer-email" name="customer-email" class="jotform-form-input">
+                </div>
+                <div class="jotform-form-row">
+                    <label for="customer-phone" class="jotform-form-label">Phone Number:</label>
+                    <input type="tel" id="customer-phone" name="customer-phone" class="jotform-form-input">
+                </div>
+                <div id="address-row" class="jotform-form-row">
+                    <div class="address-input">
+                        <label for="street-name" class="jotform-form-label desktop-label">Street Name:</label>
+                        <label for="street-name" class="jotform-form-label mobile-label">Street:</label>
+                        <input type="text" id="street-name" name="street-name" class="jotform-form-input" required>
+                    </div>
+                    <div class="address-input">
+                        <label for="city-name" class="jotform-form-label">City:</label>
+                        <input type="text" id="pool-city-name" name="city-name" class="jotform-form-input" required>
+                    </div>
+                    <div class="address-input">
+                        <label for="state-name" class="jotform-form-label">State:</label>
+                        <select id="pool-state-name" name="state-name" class="jotform-form-input" required>
+                            <option value="">Select State</option>
+                            <option value="GA">Georgia</option>
+                            <!-- Add other states as needed -->
+                        </select>
+                    </div>
+                    <div class="address-input">
+                        <label for="zip-code" class="jotform-form-label">Zip Code:</label>
+                        <input type="text" id="pool-zip-code" name="zip-code" class="jotform-form-input" style="width: 70%;" required>
+                    </div>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="property-type" class="jotform-form-label">Type of Property:</label>
+                    <select id="property-type" name="property-type" class="jotform-form-input">
+                        <option value="residential">Residential</option>
+                        <option value="commercial">Commercial</option>
+                    </select>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="pool-type" class="jotform-form-label">Type of Service:</label>
+                    <select id="pool-type" name="pool-type" class="jotform-form-input">
+                        <option value="maintenance">Maintenance (including chemicals)</option>
+                        <option value="diagnostic">Diagnostic</option>
+                        <option value="opening">Opening</option>
+                        <option value="closing">Closing</option>
+                    </select>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="pool-size" class="jotform-form-label">Size of the Pool (in gallons):</label>
+                    <input type="number" step="1000" id="pool-size" name="pool-size" class="jotform-form-input">
+                    &emsp;&emsp;
+
+                    <div class="idk-row">
+                        <input type="checkbox" value="idk" id="no-property-size-pool" name="no-property-size" class="jotform-form-input">
+                        &emsp;
+                        <label for="no-property-size-pool" id="no-property-size-label" class="jotform-form-label">Not sure</label>
+                    </div>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="pool-current-state" class="jotform-form-label">When was the last time you had pool maintenance?:</label>
+                    <select id="pool-current-state" name="pool-current-state" class="jotform-form-input">
+                        <option value="recent">Within the last month</option>
+                        <option value="months">1-3 months</option>
+                        <option value="season">Last season</option>
+                    </select>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="surface-type" class="jotform-form-label">Type of Surface:</label>
+                    <select id="surface-type" name="surface-type" class="jotform-form-input">
+                        <option value="tile">Tile</option>
+                        <option value="vinyl">Vinyl</option>
+                        <option value="plaster">Plaster</option>
+                        <option value="pebbles">Pebbles</option>
+                        <option value="quartz">Quartz</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="accessibility" class="jotform-form-label">Accessibility (Pets, Obstacles, Parking Instructions):</label>
+                    <textarea id="accessibility" name="accessibility" class="jotform-form-input"></textarea>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="preferred-contact" class="jotform-form-label">Preferred Contact Method:</label>
+                    <select id="preferred-contact" name="preferred-contact" class="jotform-form-input">
+                        <option value="email">Email</option>
+                        <option value="phone">Phone</option>
+                        <option value="text">Text</option>
+                    </select>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="additional-info" class="jotform-form-label">Additional Information or Questions:</label>
+                    <textarea id="additional-info" name="additional-info" class="jotform-form-input"></textarea>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="pool-photos" class="jotform-form-label">Upload Photos (if available):</label>
+                    <input type="file" id="pool-photos" name="pool-photos[]" class="jotform-form-input" multiple>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="pool-budget" class="jotform-form-label">Get Instant Quote <br> (if pool size entered):</label>
+                    <select id="pool-budget" name="pool-budget" class="jotform-form-input">
+                        <option value="ok">Tier 1</option>
+                        <option value="good">Tier 2</option>
+                        <option value="best">Tier 3</option>
+                    </select>
+
+                    &nbsp;
+
+                    <button type="button" id="pool-quote-button" class="jotform-form-input">Get Quote</button>
+                </div>
+                <input type="hidden" id="pool-projectedTotalCost" name="projectedTotalCost">
+                <div id="pool-quote-result" style="text-align: center;"></div> <!-- To display the quote result -->
+                <br>
+                <div class="g-recaptcha" data-sitekey="6LcXEJ4pAAAAANKctEJyDsXMcnBESRGPwjPabMHb"></div>
+                <br>
+                <div class="jotform-submit-section">
+                    <button type="submit" class="jotform-submit" data-callback="onSubmitPool">Submit</button>
+                </div>
+            </form>
+
+            <!-- Pressure Washing Form -->
+            <form id="pressure-washing-form" onsubmit="return validateAddress()" style="display: none;" method="POST" action="assets/php/quickbook.php" enctype="multipart/form-data">
+                <h2>Pressure Washing Service Request Form</h2>
+                <div class="jotform-form-row">
+                    <label for="customer-name" class="jotform-form-label">Full Name:</label>
+                    <input type="text" id="customer-name" name="customer-name" class="jotform-form-input">
+                </div>
+                <div class="jotform-form-row">
+                    <label for="customer-email" class="jotform-form-label">Email Address:</label>
+                    <input type="email" id="customer-email" name="customer-email" class="jotform-form-input">
+                </div>
+                <div class="jotform-form-row">
+                    <label for="customer-phone" class="jotform-form-label">Phone Number:</label>
+                    <input type="tel" id="customer-phone" name="customer-phone" class="jotform-form-input">
+                </div>
+                <div id="address-row" class="jotform-form-row">
+                    <div class="address-input">
+                        <label for="street-name" class="jotform-form-label desktop-label">Street Name:</label>
+                        <label for="street-name" class="jotform-form-label mobile-label">Street:</label>
+                        <input type="text" id="street-name" name="street-name" class="jotform-form-input" required>
+                    </div>
+                    <div class="address-input">
+                        <label for="city-name" class="jotform-form-label">City:</label>
+                        <input type="text" id="pw-city-name" name="city-name" class="jotform-form-input" required>
+                    </div>
+                    <div class="address-input">
+                        <label for="state-name" class="jotform-form-label">State:</label>
+                        <select id="pw-state-name" name="state-name" class="jotform-form-input" required>
+                            <option value="">Select State</option>
+                            <option value="GA">Georgia</option>
+                            <!-- Add other states as needed -->
+                        </select>
+                    </div>
+                    <div class="address-input">
+                        <label for="zip-code" class="jotform-form-label">Zip Code:</label>
+                        <input type="text" id="pw-zip-code" name="zip-code" class="jotform-form-input" style="width: 70%;" required>
+                    </div>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="pw-property-type" class="jotform-form-label">Type of Property:</label>
+                    <select id="property-type" name="property-type" class="jotform-form-input">
+                        <option value="residential">Residential</option>
+                        <option value="commercial">Commercial</option>
+                    </select>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="pw-service-type" class="jotform-form-label">Type of Service:</label>
+                    <select id="pw-service-type" name="pw-service-type" class="jotform-form-input">
+                        <option value="pressure-washing">Pressure Washing</option>
+                        <option value="gutter">Gutter Cleaning</option>
+                        <option value="dumpster">Dumpster Cleaning</option>
+                    </select>
+                </div>
+                <div class="surface-option" style="display: none;">
+                    <div class="jotform-form-row">
+                        <label for="surface-type" class="jotform-form-label">Type of Surface:</label>
+                        <select id="surface-type" name="surface-type" class="jotform-form-input">
+                            <option value="driveway">Driveway</option>
+                            <option value="sidewalk">Sidewalk</option>
+                            <option value="walkway">Walkway</option>
+                            <option value="deck">Deck</option>
+                            <option value="all">All Pavement</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="area-size" class="jotform-form-label">Approximate Area Size (in square feet):</label>
+                    <input type="number" step="1" id="area-size" name="area-size" class="jotform-form-input">
+                    &emsp;&emsp;
+                    
+                    <div class="idk-row">
+                        <input type="checkbox" value="idk" id="no-property-size-pressure" name="no-property-size" class="jotform-form-input">
+                        &emsp;
+                        <label for="no-property-size-pressure" id="no-property-size-label" class="jotform-form-label">Not sure</label>
+                    </div>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="accessibility" class="jotform-form-label">Accessibility (Pets, Obstacles, Parking Instructions):</label>
+                    <textarea id="accessibility" name="accessibility" class="jotform-form-input"></textarea>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="preferred-contact" class="jotform-form-label">Preferred Contact Method:</label>
+                    <select id="preferred-contact" name="preferred-contact" class="jotform-form-input">
+                        <option value="email">Email</option>
+                        <option value="phone">Phone</option>
+                        <option value="text">Text</option>
+                    </select>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="additional-info" class="jotform-form-label">Additional Information or Questions:</label>
+                    <textarea id="additional-info" name="additional-info" class="jotform-form-input"></textarea>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="pressure-washing-photos" class="jotform-form-label">Upload Photos (if available):</label>
+                    <input type="file" id="pressure-washing-photos" name="pressure-washing-photos[]" class="jotform-form-input" multiple>
+                </div>
+                <div class="jotform-form-row">
+                    <label for="pw-budget" class="jotform-form-label">Get Instant Quote <br> (if area size entered):</label>
+                    <select id="pw-budget" name="pw-budget" class="jotform-form-input">
+                        <option value="ok">Tier 1</option>
+                        <option value="good">Tier 2</option>
+                        <option value="best">Tier 3</option>
+                    </select>
+
+                    &nbsp;
+
+                    <button type="button" id="pressure-washing-quote-button" class="jotform-form-input">Get Quote</button>
+                </div>
+                <input type="hidden" id="pressure-washing-projectedTotalCost" name="projectedTotalCost">
+                <div id="pressure-washing-quote-result" style="text-align: center;"></div> <!-- To display the quote result -->
+                <br>
+                <div class="g-recaptcha" data-sitekey="6LcXEJ4pAAAAANKctEJyDsXMcnBESRGPwjPabMHb"></div>
+                <br>
+                <div class="jotform-submit-section">
+                    <button type="submit" class="jotform-submit" data-callback="onSubmitPressureWashing">Submit</button>
+                </div>
+            </form>            
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 King Frank Digital Marketing</p>
+    </footer>
+<script>
+    let selectedPackage = null;
+
+    function selectPackage(packageId) {
+        const packageElement = document.getElementById(packageId);
+        
+        // Deselect the currently selected package, if any
+        if (selectedPackage) {
+            selectedPackage.querySelector('h3').classList.remove('selected-package');
+            selectedPackage.querySelector('h3').style.color = '';
+            selectedPackage.style.border = '';
+            selectedPackage = null;
+        }
+
+        // Select the clicked package
+        const h3Element = packageElement.querySelector('h3');
+        h3Element.classList.add('selected-package');
+        h3Element.style.color = '#fff';
+        packageElement.style.border = '';
+        selectedPackage = packageElement;
+
+        // Hide all forms initially
+        document.getElementById('lawn-care-form').style.display = 'none';
+        document.getElementById('pool-care-form').style.display = 'none';
+        document.getElementById('pressure-washing-form').style.display = 'none';
+
+        // Show the corresponding form based on the selected package
+        if (packageId === 'package1') {
+            // Show lawn care form
+            document.getElementById('lawn-care-form').style.display = 'block';
+        } else if (packageId === 'package2') {
+            // Show pool care form
+            document.getElementById('pool-care-form').style.display = 'block';
+        } else if (packageId === 'package3') {
+            // Show pressure washing form
+            document.getElementById('pressure-washing-form').style.display = 'block';
+        }
+
+        // Show the jotform-section
+        document.querySelector('.jotform-section').classList.add('show');
+    }
+
+    function validateAddress() {
+        var streetName = document.getElementById('street-name').value || document.getElementById('pw-street-name').value || document.getElementById('pool-street-name').value;
+        var cityName = document.getElementById('city-name').value || document.getElementById('pw-city-name').value || document.getElementById('pool-city-name').value;
+        var stateName = document.getElementById('state-name').value || document.getElementById('pw-state-name').value || document.getElementById('pool-state-name').value;
+        var zipCode = document.getElementById('zip-code').value || document.getElementById('pw-zip-code').value || document.getElementById('pool-zip-code').value;
+
+        // Regular expressions for each field
+        var streetPattern = /^\d+\s[\w\s]+$/; // Example: "123 Main Street"
+        var cityPattern = /^[\w\s]+$/; // Example: "Anytown"
+        var statePattern = /^[A-Z]{2}$/; // Example: "NY"
+        var zipPattern = /^\d{5}$/; // Example: "12345"
+
+        if (!streetPattern.test(streetName)) {
+            alert('Please enter a valid street name (e.g., "123 Main Street").');
+            console.log("Street Name:", streetName);
+            return false;
+        }
+        if (!cityPattern.test(cityName)) {
+            alert('Please enter a valid city name (e.g., "Anytown").');
+            console.log("City Name:", cityName);
+            return false;
+        }
+        if (!statePattern.test(stateName)) {
+            alert('Please select a state.');
+            console.log("State Name:", stateName);
+            return false;
+        }
+        if (!zipPattern.test(zipCode)) {
+            alert('Please enter a valid zip code (e.g., "12345").');
+            console.log("Zip Code:", zipCode);
+            return false;
+        }
+        return true; // Allow form submission if all validations pass
+    }
+
+    function onSubmitLawn(token) {
+        var form = document.getElementById('lawn-care-form'); // Adjust the ID for the specific form
+        var formData = new FormData(form);
+        formData.append('g-recaptcha-response', token);
+
+        fetch('assets/php/quickbook.php', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data); // Show success or error message
+            grecaptcha.reset(); // Reset reCAPTCHA
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function onSubmitPool(token) {
+        var form = document.getElementById('pool-care-form'); // Adjust the ID for the specific form
+        var formData = new FormData(form);
+        formData.append('g-recaptcha-response', token);
+
+        fetch('assets/php/quickbook.php', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data); // Show success or error message
+            grecaptcha.reset(); // Reset reCAPTCHA
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function onSubmitPressureWashing(token) {
+        var form = document.getElementById('pressure-washing-form'); // Adjust the ID for the specific form
+        var formData = new FormData(form);
+        formData.append('g-recaptcha-response', token);
+
+        fetch('assets/php/quickbook.php', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data); // Show success or error message
+            grecaptcha.reset(); // Reset reCAPTCHA
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    document.getElementById('quote-button').addEventListener('click', function() {
+        // Get the selected tier and acreage
+        var tier = document.getElementById('lawn-budget').value;
+        var acreage = parseFloat(document.getElementById('lawn-property-size').value);
+
+        // Calculate the lawn care cost
+        var totalCost = calculateLawnCareCost(acreage, tier);
+
+        // Display the quote result
+        document.getElementById('quote-result').innerHTML = "Total cost for " + acreage + " acres (" + tier + " tier): $" + totalCost.toFixed(2);
+    });
+
+    function calculateLawnCareCost(acreage, tier, serviceType, terrain, currentState, propertyType) {
+        let hourlyRate = 0;
+        let timePerAcre = 0;
+        let additionalChargePerAcre = 0;
+
+        // Set hourly rate, time per acre, and additional charge based on tier
+        if (serviceType === "cut") {
+            if (tier === "ok") {
+                if (acreage <= 0.125) {
+                    hourlyRate = 320;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                } else if (acreage <= 0.25) {
+                    hourlyRate = 240;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                } else if (acreage <= 0.5) {
+                    hourlyRate = 150;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                } else {
+                    hourlyRate = 100;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                }
+            } else if (tier === "good") {
+                if (acreage <= 0.125) {
+                    hourlyRate = 440;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                } else if (acreage <= 0.25) {
+                    hourlyRate = 300;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                } else if (acreage <= 0.5) {
+                    hourlyRate = 190;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                } else {
+                    hourlyRate = 125;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                }
+            } else if (tier === "best") {
+                if (acreage <= 0.125) {
+                    hourlyRate = 560;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                } else if (acreage <= 0.25) {
+                    hourlyRate = 380;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                } else if (acreage <= 0.5) {
+                    hourlyRate = 250;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                } else {
+                    hourlyRate = 200;
+                    timePerAcre = 1;
+                    additionalChargePerAcre = 1;
+                }
+            } else {
+                return "Invalid tier";
+            }
+        } else if (serviceType === "leaf" || serviceType === "snow") {
+            if (tier === "ok") {
+                hourlyRate = 900;
+                timePerAcre = 1;
+                if(acreage < .05){
+                    additionalChargePerAcre = 44;
+                }else if(acreage == .05 ) {
+                additionalChargePerAcre = 17.5;
+                }
+            } else if (tier === "good") {
+                hourlyRate = 1200;
+                timePerAcre = 1;
+                if(acreage < .05){
+                    additionalChargePerAcre = 44;
+                }else if(acreage == .05 ) {
+                additionalChargePerAcre = 17.5;
+                }
+            } else if (tier === "best") {
+                hourlyRate = 1450;
+                timePerAcre = 1;
+                if(acreage < .05){
+                    additionalChargePerAcre = 44;
+                }else if(acreage == .05 ) {
+                additionalChargePerAcre = 17.5;
+                }
+            } else {
+                return "Invalid tier";
+            }
+        }
+
+        // Validate service type
+        if (!(serviceType === "cut" || serviceType === "leaf" || serviceType === "snow")) {
+            return "Service not eligible for quote";
+        }
+
+        // Additional charge for terrain
+        let terrainCharge = 0;
+        if (terrain === "sloped" || terrain === "multi") {
+            terrainCharge = (Math.ceil(acreage * 100) / 100) * 35;
+        }
+
+        // Additional charge for current state
+        let stateCharge = 0;
+        if (currentState === "overgrown") {
+            stateCharge = (Math.ceil(acreage * 100) / 100) * 100;
+        }
+
+        // Additional charge for property
+        let propertyCharge = 0;
+        if (propertyType === "commercial") {
+            propertyCharge = (Math.ceil(acreage * 100) / 100) * 10;
+        }
+
+        // Calculate total time and cost
+        let total_time = acreage * timePerAcre;
+        let additionalCharge = (acreage / 0.1) * additionalChargePerAcre; // Default additional charge
+        let totalCost = (total_time * hourlyRate) + additionalCharge + terrainCharge + stateCharge + propertyCharge;
+
+        return { totalCost: totalCost, hourlyRate: hourlyRate, additionalCharge: additionalCharge, terrainCharge: terrainCharge, stateCharge: stateCharge, total_time: total_time };
+    }
+
+    document.getElementById('service-type').addEventListener('change', function() {
+        const removalOptions = document.getElementById('removal-options');
+        const cutOptions = document.getElementById('cut-options');
+        if (this.value === 'leaf' || this.value === 'snow') {
+            removalOptions.style.display = 'block';
+            cutOptions.style.display = 'none';
+        } else {
+            removalOptions.style.display = 'none';
+            cutOptions.style.display = 'block';
+        }
+    });
+
+    // Example usage:
+    document.getElementById('quote-button').addEventListener('click', function() {
+        // Get the selected tier, acreage, service type, terrain, and current state
+        let tier = document.getElementById('lawn-budget').value;
+        let acreage = parseFloat(document.getElementById('lawn-property-size').value);
+        let serviceType = document.getElementById('service-type').value;
+        let terrain = document.getElementById('lawn-terrain').value;
+        let currentState = document.getElementById('lawn-current-state').value;
+        let property = document.getElementById('property-type').value;
+
+        // Calculate the lawn care cost
+        let quoteResult = calculateLawnCareCost(acreage, tier, serviceType, terrain, currentState, property);
+
+        // Calculate booking and processing fee (5% of total cost)
+        let bookingProcessingFee = quoteResult.totalCost * 0.0575;
+
+        // Calculate projected total cost (quote + booking and processing fee)
+        let projectedTotalCost = quoteResult.totalCost + bookingProcessingFee;
+
+        // Display the quote result
+        let quoteDiv = document.getElementById('quote-result');
+        quoteDiv.innerHTML = `
+            <div style="text-align: left;">
+                <p><strong>Quote:</strong> $${quoteResult.totalCost.toFixed(2)}</p>
+                <p><strong>Booking and Processing fee:</strong> $${bookingProcessingFee.toFixed(2)}</p>
+                <hr>
+                <p><strong>Projected Total Cost:</strong> $${projectedTotalCost.toFixed(2)}</p>
+            </div>
+        `;
+
+        // Update the hidden input for projected total cost
+        document.getElementById('lawn-projectedTotalCost').value = projectedTotalCost.toFixed(2);
+    });
+
+    // Add event listeners to all input fields to hide the quote
+    document.querySelectorAll('.jotform-form-input').forEach(input => {
+        input.addEventListener('input', function() {
+            document.getElementById('quote-result').innerHTML = ""; // Clear the quote
+        });
+    });
+
+    // Add this function to calculate pool care cost with tier-based pricing
+    function calculatePoolCareCost(poolSize, serviceType, tier) {
+        let totalCost = 0;
+        let additionalChargePerGallon = 0;
+
+        if (serviceType === "maintenance") {
+            if (tier === "ok") {
+                if (poolSize <= 5000) {
+                    totalCost = 35;
+                    additionalChargePerGallon = 0.008;
+                } else if (poolSize <= 15000) {
+                    totalCost = 75;
+                    additionalChargePerGallon = 0.003;
+                } else if (poolSize <= 30000) {
+                    totalCost = 120;
+                    additionalChargePerGallon = 0.001;
+                } else {
+                    totalCost = 180 + ((poolSize - 30000) * 0.006);
+                    additionalChargePerGallon = 0.001;
+                }
+            } else if (tier === "good") {
+                if (poolSize <= 5000) {
+                    totalCost = 50;
+                    additionalChargePerGallon = 0.008;
+                } else if (poolSize <= 15000) {
+                    totalCost = 90;
+                    additionalChargePerGallon = 0.003;
+                } else if (poolSize <= 30000) {
+                    totalCost = 150;
+                    additionalChargePerGallon = 0.001;
+                } else {
+                    totalCost = 200 + ((poolSize - 30000) * 0.006);
+                    additionalChargePerGallon = 0.001;
+                }
+            } else if (tier === "best") {
+                if (poolSize <= 5000) {
+                    totalCost = 75;
+                    additionalChargePerGallon = 0.008;
+                } else if (poolSize <= 15000) {
+                    totalCost = 125;
+                    additionalChargePerGallon = 0.003;
+                } else if (poolSize <= 30000) {
+                    totalCost = 175;
+                    additionalChargePerGallon = 0.001;
+                } else {
+                    totalCost = 225 + ((poolSize - 30000) * 0.006);
+                    additionalChargePerGallon = 0.001;
+                }
+            } else {
+                return "Invalid tier";
+            }
+        }  else if (serviceType === "diagnostic") {
+            if (tier === "ok") {
+                totalCost = 125;
+                additionalChargePerGallon = 0.001;
+            } else if (tier === "good") {
+                totalCost = 160;
+                additionalChargePerGallon = 0.001;
+            } else if (tier === "best") {
+                totalCost = 200;
+                additionalChargePerGallon = 0.001;
+            } else {
+                return "Invalid tier";
+            }
+        } else if (serviceType === "closing" || serviceType === "opening") { 
+            if (tier === "ok") {
+                if (poolSize <= 5000) {
+                    totalCost = 120;
+                    additionalChargePerGallon = 0.008;
+                } else if (poolSize <= 15000) {
+                    totalCost = 160;
+                    additionalChargePerGallon = 0.003;
+                } else if (poolSize <= 30000) {
+                    totalCost = 205;
+                    additionalChargePerGallon = 0.001;
+                } else {
+                    totalCost = 265 + ((poolSize - 30000) * 0.006);
+                    additionalChargePerGallon = 0.001;
+                }
+            } else if (tier === "good") {
+                if (poolSize <= 5000) {
+                    totalCost = 190;
+                    additionalChargePerGallon = 0.008;
+                } else if (poolSize <= 15000) {
+                    totalCost = 230;
+                    additionalChargePerGallon = 0.003;
+                } else if (poolSize <= 30000) {
+                    totalCost = 280;
+                    additionalChargePerGallon = 0.001;
+                } else {
+                    totalCost = 340 + ((poolSize - 30000) * 0.006);
+                    additionalChargePerGallon = 0.001;
+                }
+            } else if (tier === "best") {
+                if (poolSize <= 5000) {
+                    totalCost = 270;
+                    additionalChargePerGallon = 0.008;
+                } else if (poolSize <= 15000) {
+                    totalCost = 320;
+                    additionalChargePerGallon = 0.003;
+                } else if (poolSize <= 30000) {
+                    totalCost = 370;
+                    additionalChargePerGallon = 0.001;
+                } else {
+                    totalCost = 420 + ((poolSize - 30000) * 0.006);
+                    additionalChargePerGallon = 0.001;
+                }
+            } else {
+                return "Invalid tier";
+            }
+        } else {
+            // Add logic for other service types if necessary
+        }
+
+        totalCost = totalCost + (poolSize * additionalChargePerGallon);
+
+        return totalCost;
+    }
+
+    // Add this event listener for the pool care form quote button
+    document.getElementById('pool-quote-button').addEventListener('click', function() {
+        let poolSize = parseFloat(document.getElementById('pool-size').value);
+        let serviceType = document.getElementById('pool-type').value;
+        let tier = document.getElementById('pool-budget').value;
+
+        let totalCost = calculatePoolCareCost(poolSize, serviceType, tier);
+
+        // Calculate booking and processing fee (5% of total cost)
+        let bookingProcessingFee = totalCost * 0.0575;
+
+        // Calculate projected total cost (total cost + booking and processing fee)
+        let projectedTotalCost = totalCost + bookingProcessingFee;
+
+        document.getElementById('pool-quote-result').innerHTML = `
+            <div style="text-align: left;">
+                <p><strong>Total Cost:</strong> $${totalCost.toFixed(2)}</p>
+                <p><strong>Booking and Processing Fee:</strong> $${bookingProcessingFee.toFixed(2)}</p>
+                <hr>
+                <p><strong>Projected Total Cost:</strong> $${projectedTotalCost.toFixed(2)}</p>
+            </div>
+        `;
+
+        // Update the hidden input for projected total cost
+        document.getElementById('pool-projectedTotalCost').value = projectedTotalCost.toFixed(2);
+    });
+
+    document.getElementById('pw-service-type').addEventListener('change', function() {
+        var propertyTypeLabel = document.querySelector('label[for="pw-property-type"]');
+        const surfaceTypeRow = document.querySelector('.surface-option');
+        const areaSizeLabel = document.querySelector('label[for="area-size"]');
+        
+        if (this.value === 'pressure-washing') {
+            surfaceTypeRow.style.display = 'block';
+        } else if (this.value === 'gutter') {
+            areaSizeLabel.textContent = 'Approximate Linear Footage:';
+            surfaceTypeRow.style.display = 'none';
+        } else if (this.value === 'dumpster') {
+            propertyTypeLabel.textContent = 'Type of Dumpster:';
+            surfaceTypeRow.style.display = 'none';
+            areaSizeLabel.textContent = 'Number of Dumpster(s):';
+        } else {
+            surfaceTypeRow.style.display = 'none';
+            areaSizeLabel.textContent = 'Approximate Area Size (in square feet):';
+        }
+    });
+
+    function calculatePressureWashingCost(areaSize, serviceType, tier) {
+        let totalCost = 0;
+
+        if (serviceType === "gutter") {
+            const ratePerSquareFoot = {
+                "ok": 1.25,
+                "good": 2,
+                "best": 2.25
+            };
+            totalCost = areaSize * (ratePerSquareFoot[tier] || 0);
+        } else if (serviceType === "pressure-washing") {
+            const ratePerSquareFoot = {
+                "ok": 0.15,
+                "good": 0.25,
+                "best": 0.35
+            };
+            totalCost = areaSize * (ratePerSquareFoot[tier] || 0);
+        } else if (serviceType === "dumpster") {
+            const ratePerDumpster = {
+                "ok": 30,
+                "good": 50,
+                "best": 75
+            };
+            totalCost = areaSize * (ratePerDumpster[tier] || 0);
+        } else {
+            // Add logic for other service types if necessary
+        }
+
+        return totalCost;
+    }
+
+    document.getElementById('pressure-washing-quote-button').addEventListener('click', function() {
+        let areaSize = parseFloat(document.getElementById('area-size').value);
+        let serviceType = document.getElementById('pw-service-type').value;
+        let tier = document.getElementById('pw-budget').value; // Adjusted to use the correct ID for tier selection in pressure washing form
+
+        let totalCost = calculatePressureWashingCost(areaSize, serviceType, tier);
+
+        // Calculate booking and processing fee (5% of total cost)
+        let bookingProcessingFee = totalCost * 0.0575;
+
+        // Calculate projected total cost (total cost + booking and processing fee)
+        let projectedTotalCost = totalCost + bookingProcessingFee;
+
+        document.getElementById('pressure-washing-quote-result').innerHTML = `
+            <div style="text-align: left;">
+                <p><strong>Total Cost:</strong> $${totalCost.toFixed(2)}</p>
+                <p><strong>Booking and Processing Fee:</strong> $${bookingProcessingFee.toFixed(2)}</p>
+                <hr>
+                <p><strong>Projected Total Cost:</strong> $${projectedTotalCost.toFixed(2)}</p>
+            </div>
+        `;
+
+        // Update the hidden input for projected total cost
+        document.getElementById('pressure-washing-projectedTotalCost').value = projectedTotalCost.toFixed(2);
+    });
+
+    document.getElementById('no-property-size-lawn').addEventListener('change', function() {
+        if (this.checked) {
+            document.getElementById('lawn-property-size').value = 0;
+            document.getElementById('lawn-property-size').disabled = true;
+
+            // Hide the quote button for lawn form
+            document.getElementById('quote-button').style.display = 'none';
+        } else {
+            document.getElementById('lawn-property-size').disabled = false;
+
+            // Show the quote button for lawn form
+            document.getElementById('quote-button').style.display = 'block';
+        }
+    });
+
+    document.getElementById('no-property-size-pool').addEventListener('change', function() {
+        if (this.checked) {
+            document.getElementById('pool-size').value = 0;
+            document.getElementById('pool-size').disabled = true;
+
+            // Hide the quote button for pool form
+            document.getElementById('pool-quote-button').style.display = 'none';
+        } else {
+            document.getElementById('pool-size').disabled = false;
+
+            // Show the quote button for pool form
+            document.getElementById('pool-quote-button').style.display = 'block';
+        }
+    });
+
+    document.getElementById('no-property-size-pressure').addEventListener('change', function() {
+        if (this.checked) {
+            document.getElementById('area-size').value = 0;
+            document.getElementById('area-size').disabled = true;
+
+            // Hide the quote button for pressure washing form
+            document.getElementById('pressure-washing-quote-button').style.display = 'none';
+        } else {
+            document.getElementById('area-size').disabled = false;
+
+            // Show the quote button for pressure washing form
+            document.getElementById('pressure-washing-quote-button').style.display = 'block';
+        }
+    });
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        // Function to toggle nav display
+        function toggleNav() {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex'; // Ensure nav links are visible when not in mobile view
+            } else {
+                navLinks.style.display = 'none'; // Ensure nav links are hidden when in mobile view
+            }
+        }
+
+        // Event listener for hamburger menu click
+        hamburger.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Event listener for window resize
+        window.addEventListener('resize', toggleNav);
+
+        // Initial check
+        toggleNav();
+    });
+</script>
+</body>
+</html>

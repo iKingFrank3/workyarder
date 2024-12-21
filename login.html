@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="assets/img/WYicon.png" rel="icon">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-container h1 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .login-container img {
+            width: 100px;
+            height: 50px;
+            margin-bottom: 20px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-form button {
+            background-color: #4F8E35;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .login-form button:hover {
+            background-color: #3d6b2a;
+        }
+
+        .forgot-password {
+            margin-top: 10px;
+            color: #555;
+            font-size: 14px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .back-to-home {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4F8E35;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .back-to-home:hover {
+            background-color: #3d6b2a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <img src="assets/img/WorkYarder-logo.png" alt="Small Logo" style="height: 40px; width: 130px;">
+        <form class="login-form" action="assets/php/login.php" method="post">
+            <input type="text" name="username" placeholder="Your Username" required>
+            <input type="password" name="password" placeholder="Your Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <br>
+        <a class="forgot-password" href="account-request.html">Create an Account</a>
+        <div class="forgot-password">Forgot Password?</div>
+    </div>
+
+    <a href="index.html" class="back-to-home">Back to Home Page</a>
+
+</body>
+</html>

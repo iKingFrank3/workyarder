@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkYarder</title>
+    <link href="assets/img/WYicon.png" rel="icon">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* General Styles */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        footer {
+            margin-top: auto;
+        }
+
+        /* Navigation Styles */
+        nav {
+            display: flex; /* Use flexbox for layout */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        .nav-links {
+            display: flex; /* Ensures that links are laid out in a row */
+            list-style: none; /* Removes bullet points from links */
+            padding: 0; /* Removes padding */
+        }
+
+        .nav-links a {
+            margin: 0 1rem; /* Adds horizontal spacing between links */
+            text-decoration: none; /* Removes underline from links */
+            color: inherit; /* Inherits color from parent */
+        }
+
+        .hamburger {
+            display: none; /* Hamburger menu is hidden by default */
+        }
+
+        /* About Us and Slider Carousel Styles */
+        #about-us, #story-slider {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.9); /* Only for #about-us */
+        }
+
+        .slider {
+            position: relative;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .slider-image {
+            width: 100%;
+            border-radius: 10px;
+            display: block; /* Ensure images are block to avoid bottom margin */
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            #about-us, #story-slider {
+                padding: 1rem;
+                margin: 1rem;
+            }
+
+            .slider {
+                max-width: 100%;
+            }
+
+            nav {
+                position: relative;
+            }
+
+            .hamburger {
+                display: block; /* Hamburger menu is shown in mobile mode */
+                cursor: pointer;
+                font-size: 30px;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                background-color: #333;
+            }
+
+            .nav-links a {
+                padding: 10px;
+                border-bottom: 1px solid #ccc;
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>About Us</h1>
+    </header>
+
+    <nav>
+        <div class="hamburger">&#9776;</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <section id="about-us">
+        <h2>This Is Our Story.</h2>
+        <p style="font-size: 1.15em">WorkYarder was founded with the vision of revolutionizing home maintenance and improvement services. We have carefully curated a network of exceptional small businesses that excel in lawn care, pool maintenance, and power cleaning. By bringing together these experts, we offer homeowners, Airbnb hosts, event organizers, and anyone seeking convenience a seamless and comprehensive solution. Discover the power of efficiency and excellence with WorkYarder - your trusted partner in working smarter, not harder.</p>
+        <div class="slider">
+            <img src="assets/img/story-slider-03.jpg" alt="Story Image 1" class="slider-image">
+            <img src="assets/img/story-slider-04.jpg" alt="Story Image 2" class="slider-image" style="display:none;">
+            <img src="assets/img/story-slider-02.jpg" alt="Story Image 3" class="slider-image" style="display:none;">
+        </div>
+        <br>
+        <img src="assets/img/WorkYarder-logo.png" alt="Logo">
+    </section>
+
+    <footer>
+        <p>&copy; 2023 King Frank Digital Marketing</p>
+    </footer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let sliderImages = document.querySelectorAll('.slider-image');
+            let currentImageIndex = 0;
+
+            function rotateSliderImages() {
+                sliderImages[currentImageIndex].style.display = 'none';
+                currentImageIndex = (currentImageIndex + 1) % sliderImages.length;
+                sliderImages[currentImageIndex].style.display = 'block';
+            }
+
+            let interval = setInterval(rotateSliderImages, 5000);
+
+            // Initially display the first image
+            for(let i = 1; i < sliderImages.length; i++){
+                sliderImages[i].style.display = 'none';
+            }
+
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            // Function to toggle nav display
+            function toggleNav() {
+                if (window.innerWidth > 768) {
+                    navLinks.style.display = 'flex'; // Ensure nav links are visible when not in mobile view
+                } else {
+                    navLinks.style.display = 'none'; // Ensure nav links are hidden when in mobile view
+                }
+            }
+
+            // Event listener for hamburger menu click
+            hamburger.addEventListener('click', function() {
+                navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Event listener for window resize
+            window.addEventListener('resize', toggleNav);
+
+            // Initial check
+            toggleNav();
+        });
+    </script>
+</body>
+</html>

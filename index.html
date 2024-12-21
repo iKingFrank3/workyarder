@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/img/WYicon.png" rel="icon">
+    <title>WorkYarder</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .book-service-button {
+            background-color: #4F8E35;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .book-service-button:hover {
+            background-color: #3d6b2a;
+        }
+        .hero {
+            background-image: url('assets/img/grass-bg.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .service-category {
+            text-align: center;
+            margin: 2rem 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        .service-category img {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1rem;
+        }
+        .testimonial {
+            background-color: rgba(249, 249, 249, 0.9);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 5px solid #333;
+            border-radius: 5px;
+        }
+        .testimonial blockquote {
+            font-style: italic;
+            margin: 0;
+        }
+        .testimonial cite {
+            font-weight: bold;
+            display: block;
+            margin-top: 0.5rem;
+        }
+        /* New styles for "How it works" section */
+        #how-it-works {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            max-width: 85%; /* Set maximum width to 90% of the viewport width */
+            margin-left: auto; /* Center the section horizontally */
+            margin-right: auto;
+        }
+        #how-it-works h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        #how-it-works p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        #how-it-works ol {
+            list-style-type: none;
+            counter-reset: custom-counter;
+            padding-left: 0;
+            text-align: left;
+            max-width: 85%; /* Set maximum width to 90% of the viewport width */
+            margin: 0 auto; /* Center the ordered list horizontally */
+        }
+        #how-it-works ol li {
+            counter-increment: custom-counter;
+            margin-bottom: 1.3rem;
+            position: relative;
+        }
+        #how-it-works ol li::before {
+            content: counter(custom-counter);
+            background-color: #4F8E35;
+            color: #fff;
+            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            position: absolute;
+            left: -50px;
+            top: 0;
+        }
+        /* Media Queries for responsiveness */
+        @media (max-width: 768px) {
+            .service-category img {
+                width: 80px;
+                height: 80px;
+            }
+            .service-category {
+                padding: 1rem;
+            }
+            #how-it-works ol li::before {
+                left: 3;
+                top: 0px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 20px;
+                text-align: center;
+            }
+            nav {
+                margin: 0;
+            }
+            nav a {
+                display: block;
+                margin: 13px 0;
+            }
+            body {
+                font-size: 14px;
+            }
+            h1, h2, h3 {
+                font-size: 1.5em; /* Adjust the scaling factor as needed */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <p>&nbsp;</p>
+        <h1>Welcome to WorkYarder</h1>
+        <p>Why work harder, when there's WorkYarder!</p>
+        <p>&nbsp;</p>
+    </header>
+
+    <nav>
+        <a href="quick-book.html" class="book-service-button">Book Service</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+    </nav>
+
+    <section id="services">
+        <div class="services">
+            <h2 style="text-align: center;">Our Services</h2>
+            <div class="service-category lawn-care">
+                <img src="assets/img/grass.png" alt="Lawn Care">
+                <h3>Lawn Care</h3>
+                <p>Transform your lawn with our top-notch care. We take care of everything—mowing, landscaping, and more—so you can enjoy a beautiful and hassle-free outdoor space.</p>
+                <p>Simple Cut</p>
+                <p>Keep your grass neat and tidy with our precision mowing and edging services.</p>
+                <p>Leaf/Snow Removal</p>
+                <p>Maintain a clean and safe outdoor environment with our leaf and snow removal services.</p>
+            </div>
+            <div class="service-category pool-care">
+                <img src="assets/img/swimming-pool.png" alt="Pool Care">
+                <h3>Pool Care</h3>
+                <p>Dive into worry-free pool ownership. From cleaning and maintenance to water balancing, we keep your pool crystal clear, inviting, and ready for endless enjoyment.</p>
+                <p>Pool Maintenance</p>
+                <p>Ensure your pool stays clean and well-maintained with our comprehensive pool maintenance services.</p>
+                <p>Diagnostic</p>
+                <p>Identify and address any issues with your pool through our thorough diagnostic assessments.</p>
+                <p>Openings & Closings</p>
+                <p>Prepare your pool for the season or winterize it effectively with our professional opening and closing services.</p>
+            </div>
+            <div class="service-category pressure-washing">
+                <img src="assets/img/pressure-washer.png" alt="Pressure Washing">
+                <h3>Pressure Washing</h3>
+                <p>Unleash the power of clean. Our professional pressure washing service restores the beauty of your surfaces, removing dirt, grime, and stains with precision and efficiency.</p>
+                <p>Pressure Washing</p>
+                <p>Revitalize your exterior surfaces, including driveways, sidewalks, and siding, with our high-quality pressure washing techniques.</p>
+                <p>Gutter Cleaning</p>
+                <p>Ensure proper water drainage and prevent damage to your property with our thorough gutter cleaning services.</p>
+                <p>Dumpster Cleaning</p>
+                <p>Maintain a clean and sanitary environment with our professional dumpster cleaning solutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <h2 style="text-align: center;">How It Works</h2>
+    <h4 style="text-align: center;"><a href="order-status.html">Order Status</a></h4>
+
+    <!-- New "How it works" section -->
+    <section id="how-it-works">
+        <p>At WorkYarder, we simplify the process of finding outdoor service providers for your specific needs. Here's how it works:</p>
+        <ol>
+            <li>Book Service: Use our quick and easy <a href="quick-book.html">‘Book Service’</a> tab in the menu. Tell us about the outdoor service you need by filling out a simple form on our website.</li>
+            <li>Matchmaking We'll work our matchmaking magic and find the perfect provider in your area, tailored just for you.</li>
+            <li>Confirmation: Once matched, you'll get instant confirmation and flexible scheduling options. It's like magic in your hands!</li>
+            <li>Relax & Rejoice: Kick back, relax, and let our skilled providers work their magic outdoors. Enjoy a stress-free experience while we handle everything with care and expertise.</li>
+        </ol>
+    </section>
+
+    <section id="testimonials">
+        <h2 style="text-align: center;">Testimonials</h2>
+        <div class="testimonial">
+            <blockquote>"Great service! Fixed my plumbing issue in no time."</blockquote>
+            <cite>John Doe</cite>
+        </div>
+        <div class="testimonial">
+            <blockquote>"The electrician was very professional and efficient."</blockquote>
+            <cite>Jane Smith</cite>
+        </div>
+        <div class="testimonial">
+            <blockquote>"Quick and reliable lawn care service. My garden has never looked better!"</blockquote>
+            <cite>Emily Turner</cite>
+        </div>
+        <div class="testimonial">
+            <blockquote>"Their pool cleaning service is top-notch. Highly recommend!"</blockquote>
+            <cite>Michael Brown</cite>
+        </div>
+        <div class="testimonial">
+            <blockquote>"What Michael said!"</blockquote>
+            <cite>James Brown</cite>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 King Frank Digital Marketing</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let testimonials = document.querySelectorAll('.testimonial');
+            let currentIndex = 0;
+
+            function rotateTestimonials() {
+                testimonials[currentIndex].style.display = 'none';
+                currentIndex = (currentIndex + 1) % testimonials.length;
+                testimonials[currentIndex].style.display = 'block';
+                testimonials[(currentIndex + 1) % testimonials.length].style.display = 'block';
+
+                if (currentIndex === 4) {
+                    testimonials[currentIndex % testimonials.length].style.display = 'none';
+                    currentIndex = 0;
+                    testimonials[currentIndex].style.display = 'block';
+                    testimonials[(currentIndex + 1) % testimonials.length].style.display = 'block';
+                }
+            }
+
+            let interval = setInterval(rotateTestimonials, 5000);
+
+            // Initially display the first two testimonials
+            for(let i = 2; i < testimonials.length; i++){
+                testimonials[i].style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

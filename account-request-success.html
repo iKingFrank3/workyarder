@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkYarder</title>
+    <link href="assets/img/WYicon.png" rel="icon">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+    .jotform-section {
+        max-width: 400px; /* Set a maximum width */
+        margin: 0 auto; /* Center the section */
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .jotform-section img{
+        text-align: center; /* Center the heading */
+        display: block;
+        margin: 0 auto;
+    }
+
+    .contact-section {
+        max-width: 650px; /* Set a maximum width */
+        margin: 0 auto; /* Center the section */
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .contact-section h4 {
+        font-size: 17px;
+        margin-bottom: 15px;
+        text-align: center; /* Center the heading */
+    }
+
+    .jotform-section h4 {
+        font-size: 17px;
+        margin-bottom: 15px;
+        text-align: center; /* Center the heading */
+    }
+
+    .jotform-section p {
+        font-size: 15px;
+        margin-bottom: 15px;
+        text-align: center; /* Center the heading */
+    }
+
+    /* Form field styling */
+    .jotform-form-row {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    .jotform-form-label {
+        width: 200px; /* Fixed label width */
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .jotform-form-input,
+    .jotform-form-input-file,
+    .jotform-form-textarea 
+    {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .jotform-form-input[type="color"] {
+        height: 40px;
+        padding: 0;
+    }
+
+    /* Adjust input size and make them smaller */
+    .jotform-form-input,
+    .jotform-form-input-file,
+    .jotform-form-textarea {
+        padding: 8px;
+    }
+
+    /* Submit button styling */
+    .jotform-submit-section {
+        text-align: center;
+    }
+
+    .jotform-submit {
+        background-color: #555; /* Grey color for the button */
+        color: #fff;
+        border: none;
+        padding: 10px 20px; /* Reverted to previous size */
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center; /* Center the button */
+        display: block;
+        margin: 0 auto;
+    }
+
+    .jotform-submit:hover {
+        background-color: #444; /* Darker grey on hover */
+    }
+    
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    footer {
+        margin-top: auto;
+    }
+
+    .hamburger {
+        display: none; /* Hamburger menu is hidden by default */
+    }
+
+    nav {
+        display: flex; /* Use flexbox for layout */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .contact-section, .jotform-section {
+            padding: 10px;
+            margin: 10px;
+            max-width: 100%;
+        }
+
+        .jotform-form-label, .jotform-form-input, .jotform-form-textarea {
+            width: 100%; /* Make input fields take full width */
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hamburger {
+            display: block; /* Show hamburger menu */
+            cursor: pointer;
+            font-size: 30px;
+        }
+
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            background-color: #333;
+        }
+
+        .nav-links a {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: block;
+            text-align: center;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Request Received!</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+    </nav>
+
+    <section class="contact-section">
+        <div class="jotform-section">
+            <h4>Thank you for Request access to be <br> apart of the WorkYarder family!</h4>
+                <p>Please allow us up to 48 hours to review the info entered. If approved we will send you a link to your email to create an account with us.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 King Frank Digital Marketing</p>
+    </footer>
+    <script>
+    </script>
+</body>
+</html>
